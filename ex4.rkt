@@ -124,14 +124,24 @@
 
 (define collect-all-values-1
  (lambda (lists key)
-  @TODO
+  (cond ((empty? lists) '())
+        ((eq? (get-value (car lists) key) 'fail) (collect-all-values-1 (cdr lists) key))
+        (else (cons (get-value (car lists) key) (collect-all-values-1 (cdr lists) key)))
+  )
  )
 )
 
 (define collect-all-values-2
- (lambda (lists key)
-  @TODO
- )
-)
+  (lambda (lists key)
+    (if (empty? lists)
+        '()
+        (get-value$
+         (car lists)
+         key
+         (lambda (x)
+           (cons x
+                 (collect-all-values-2 (cdr lists) key)))
+         (lambda ()
+           (collect-all-values-2 (cdr lists) key))))))
    
    
