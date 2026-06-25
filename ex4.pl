@@ -16,7 +16,7 @@ maximum_printing_depth(100).
 % Purpose: All elements in Sublist appear in List in the same order.
 % Precondition: List is fully instantiated (queries do not include variables in their second argument).
 
-sub_list([], _).
+sub_list([], []).
 
 sub_list([X | SubTail], [X | ListTail]) :-
     sub_list(SubTail, ListTail).
@@ -47,7 +47,7 @@ sub_tree(Subtree, tree(_, Left, _)) :-
 sub_tree(Subtree, tree(_, _, Right)) :-
     sub_tree(Subtree, Right).
 
-sub_tree(Tree, Tree).
+sub_tree(tree(Value, Left, Right), tree(Value, Left, Right)).
 
 % Signature: swap_tree(Tree, InversedTree)/2
 % Purpose: InversedTree is the �mirror� representation of Tree.
